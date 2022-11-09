@@ -1,5 +1,7 @@
 package com.masai.services;
 
+import com.masai.model.IdCard;
+
 public interface IdCardService {
 
 	public  IdCard getPanCardByNumber (String panNo);

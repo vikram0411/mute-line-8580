@@ -1,5 +1,7 @@
 package com.masai.services;
 
+import com.masai.model.IdCard;
+
 public class IdCardServiceImpl implements IdCardService{
 
 	@Override

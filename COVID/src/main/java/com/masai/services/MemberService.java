@@ -2,6 +2,8 @@ package com.masai.services;
 
 import java.util.List;
 
+import com.masai.model.Member;
+
 public interface MemberService {
     
 	public List<Member> allMember();

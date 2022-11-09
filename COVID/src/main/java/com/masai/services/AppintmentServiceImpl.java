@@ -2,6 +2,8 @@ package com.masai.services;
 
 import java.util.List;
 
+import com.masai.model.Appointment;
+
 public class AppintmentServiceImpl implements AppointmentService{
 
 	@Override

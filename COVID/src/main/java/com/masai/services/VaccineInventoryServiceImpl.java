@@ -3,6 +3,9 @@ package com.masai.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.masai.model.Vaccine;
+import com.masai.model.VaccineInventory;
+
 public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 
 	@Override
@@ -46,5 +49,7 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

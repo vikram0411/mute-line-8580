@@ -3,6 +3,9 @@ package com.masai.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.masai.model.Vaccine;
+import com.masai.model.VaccineInventory;
+
 public interface VaccineInventoryService {
     
 	public List<VaccineInventory> allVaccineInventory ();

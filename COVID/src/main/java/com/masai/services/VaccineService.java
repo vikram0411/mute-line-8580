@@ -2,6 +2,8 @@ package com.masai.services;
 
 import java.util.List;
 
+import com.masai.model.Vaccine;
+
 public interface VaccineService {
     
 	public List<Vaccine> allVaccine ();

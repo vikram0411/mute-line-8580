@@ -3,7 +3,7 @@ package com.masai.model;
 import javax.persistence.*;
 
 @Entity
-public class VaccineCenter {
+public class VaccinationCenter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
