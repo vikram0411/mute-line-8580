@@ -1,7 +1,11 @@
 package com.masai.services;
 
-public interface VaccineService {
+import java.util.List;
 
+public interface VaccineService {
+    
+	public List<Vaccine> allVaccine ();
+	
 	public Vaccine getVaccineByName(String vaccineName);  
 	
 	public Vaccine getVaccinebyld (Integer vaccineld);

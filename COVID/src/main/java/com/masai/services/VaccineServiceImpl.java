@@ -1,5 +1,7 @@
 package com.masai.services;
 
+import java.util.List;
+
 public class VaccineServiceImpl implements VaccineService {
 
 	@Override
@@ -30,6 +32,12 @@ public class VaccineServiceImpl implements VaccineService {
 	public boolean deleteVaccine(Vaccine vaccine) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Vaccine> allVaccine() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

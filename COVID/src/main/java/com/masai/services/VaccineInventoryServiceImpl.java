@@ -6,37 +6,43 @@ import java.util.List;
 public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 
 	@Override
-	public Vaccineinventory getVaccineinventoryByCenter(Integer centerid) {
+	public VaccineInventory getVaccineinventoryByCenter(Integer centerid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Vaccineinventory addVaccineCount(Vaccineinventory inv) {
+	public VaccineInventory addVaccineCount(VaccineInventory inv) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Vaccineinventory updateVaccineinventory(Vaccineinventory inv) {
+	public VaccineInventory updateVaccineinventory(VaccineInventory inv) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteVVaccinelnventory(Vaccineinventory inv) {
+	public boolean deleteVVaccinelnventory(VaccineInventory inv) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Vaccineinventory> getVaccineinventoryByDate(LocalDate date) {
+	public List<VaccineInventory> getVaccineinventoryByDate(LocalDate date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Vaccineinventory> getVaccineinventoryByVaccine(Vaccine vaccine) {
+	public List<VaccineInventory> getVaccineinventoryByVaccine(Vaccine vaccine) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<VaccineInventory> allVaccineInventory() {
 		// TODO Auto-generated method stub
 		return null;
 	}

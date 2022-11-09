@@ -4,17 +4,19 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface VaccineInventoryService {
+    
+	public List<VaccineInventory> allVaccineInventory ();
+	
+	public  VaccineInventory getVaccineinventoryByCenter (Integer centerid);
 
-	public  Vaccineinventory getVaccineinventoryByCenter (Integer centerid);
+	public  VaccineInventory addVaccineCount ( VaccineInventory inv );
 
-	public  Vaccineinventory addVaccineCount ( Vaccineinventory inv );
+	public  VaccineInventory updateVaccineinventory ( VaccineInventory	inv); 
 
-	public  Vaccineinventory updateVaccineinventory ( Vaccineinventory	inv); 
+	public boolean deleteVVaccinelnventory ( VaccineInventory inv );
 
-	public boolean deleteVVaccinelnventory ( Vaccineinventory inv );
+	public List< VaccineInventory> getVaccineinventoryByDate (LocalDate date );
 
-	public List< Vaccineinventory> getVaccineinventoryByDate (LocalDate date );
-
-	public List< Vaccineinventory> getVaccineinventoryByVaccine (Vaccine vaccine); 
+	public List< VaccineInventory> getVaccineinventoryByVaccine (Vaccine vaccine); 
 	
 }

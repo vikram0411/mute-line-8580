@@ -1,5 +1,5 @@
 package com.masai.services;
 
-public class Vaccineinventory {
+public class VaccineInventory {
 
 }
