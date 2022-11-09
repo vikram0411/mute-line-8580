@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface VaccinationRegistrationService {
 
+	public List<VaccineRegistration> allVaccineRegistrations();
+	
 	public VaccineRegistration getVaccineRegistration (long mobileno); 
 
 	public List<Member> getAllMember (long mobileno);

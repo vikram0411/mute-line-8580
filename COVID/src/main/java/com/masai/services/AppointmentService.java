@@ -1,7 +1,11 @@
 package com.masai.services;
 
-public interface AppointmentService {
+import java.util.List;
 
+public interface AppointmentService {
+    
+	public List<Appointment> allAppintment();
+	
 	public  Appointment getAppointment (long bookingid);
 
 	public  Appointment addAppointment ( Appointment app);
@@ -11,3 +15,4 @@ public interface AppointmentService {
 	public boolean deleteAppointment (Appointment app);
 	
 }
+

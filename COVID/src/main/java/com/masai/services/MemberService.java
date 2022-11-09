@@ -1,8 +1,11 @@
 package com.masai.services;
 
-public interface MemberService {
-	
+import java.util.List;
 
+public interface MemberService {
+    
+	public List<Member> allMember();
+ 
 	public Member getMemberByld (Integer idcardid );
 
 	public  Member getMemberByAdharNo (long adharno );

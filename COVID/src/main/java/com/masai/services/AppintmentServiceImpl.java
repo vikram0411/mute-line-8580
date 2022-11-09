@@ -1,5 +1,7 @@
 package com.masai.services;
 
+import java.util.List;
+
 public class AppintmentServiceImpl implements AppointmentService{
 
 	@Override
@@ -24,6 +26,12 @@ public class AppintmentServiceImpl implements AppointmentService{
 	public boolean deleteAppointment(Appointment app) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Appointment> allAppintment() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

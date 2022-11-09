@@ -34,4 +34,10 @@ public class VaccinationRegistrationServiceImpl implements VaccinationRegistrati
 		return false;
 	}
 
+	@Override
+	public List<VaccineRegistration> allVaccineRegistrations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
