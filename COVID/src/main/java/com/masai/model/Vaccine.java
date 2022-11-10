@@ -1,6 +1,8 @@
 package com.masai.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Vaccine {
@@ -10,9 +12,15 @@ public class Vaccine {
     private Integer vaccineId;
     private String vaccninName;
     private String description;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<VaccinationCenter>vaccinationCenters=new ArrayList<>();
+
 
     @Embedded
     private VaccineInventory vaccineInventory;
+
+    @Embedded
+    private VaccineCount vaccineCount;
 
     public Integer getVaccineId() {
         return vaccineId;
@@ -38,6 +46,14 @@ public class Vaccine {
         this.description = description;
     }
 
+    public List<VaccinationCenter> getVaccinationCenters() {
+        return vaccinationCenters;
+    }
+
+    public void setVaccinationCenters(List<VaccinationCenter> vaccinationCenters) {
+        this.vaccinationCenters = vaccinationCenters;
+    }
+
     public VaccineInventory getVaccineInventory() {
         return vaccineInventory;
     }
@@ -46,12 +62,21 @@ public class Vaccine {
         this.vaccineInventory = vaccineInventory;
     }
 
+    public VaccineCount getVaccineCount() {
+        return vaccineCount;
+    }
 
-    public Vaccine(Integer vaccineId, String vaccninName, String description, VaccineInventory vaccineInventory) {
+    public void setVaccineCount(VaccineCount vaccineCount) {
+        this.vaccineCount = vaccineCount;
+    }
+
+    public Vaccine(Integer vaccineId, String vaccninName, String description, List<VaccinationCenter> vaccinationCenters, VaccineInventory vaccineInventory, VaccineCount vaccineCount) {
         this.vaccineId = vaccineId;
         this.vaccninName = vaccninName;
         this.description = description;
+        this.vaccinationCenters = vaccinationCenters;
         this.vaccineInventory = vaccineInventory;
+        this.vaccineCount = vaccineCount;
     }
 
     public Vaccine() {
@@ -63,7 +88,9 @@ public class Vaccine {
                 "vaccineId=" + vaccineId +
                 ", vaccninName='" + vaccninName + '\'' +
                 ", description='" + description + '\'' +
+                ", vaccinationCenters=" + vaccinationCenters +
                 ", vaccineInventory=" + vaccineInventory +
+                ", vaccineCount=" + vaccineCount +
                 '}';
     }
 }

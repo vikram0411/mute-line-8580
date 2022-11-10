@@ -16,12 +16,11 @@ public class Appointment {
     private Slot slot;
     private boolean bookingStatus;
 
-    @OneToMany
-    private List<Member>memberList=new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Member member;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "appointmentList")
     private List<VaccinationCenter>vaccinationCenters=new ArrayList<>();
-
 
     public long getBookingId() {
         return bookingId;
@@ -63,12 +62,12 @@ public class Appointment {
         this.bookingStatus = bookingStatus;
     }
 
-    public List<Member> getMemberList() {
-        return memberList;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberList(List<Member> memberList) {
-        this.memberList = memberList;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public List<VaccinationCenter> getVaccinationCenters() {
@@ -79,13 +78,13 @@ public class Appointment {
         this.vaccinationCenters = vaccinationCenters;
     }
 
-    public Appointment(long bookingId, long mobileNo, LocalDate dateOfBooking, Slot slot, boolean bookingStatus, List<Member> memberList, List<VaccinationCenter> vaccinationCenters) {
+    public Appointment(long bookingId, long mobileNo, LocalDate dateOfBooking, Slot slot, boolean bookingStatus, Member member, List<VaccinationCenter> vaccinationCenters) {
         this.bookingId = bookingId;
         this.mobileNo = mobileNo;
         this.dateOfBooking = dateOfBooking;
         this.slot = slot;
         this.bookingStatus = bookingStatus;
-        this.memberList = memberList;
+        this.member = member;
         this.vaccinationCenters = vaccinationCenters;
     }
 
@@ -100,7 +99,7 @@ public class Appointment {
                 ", dateOfBooking=" + dateOfBooking +
                 ", slot=" + slot +
                 ", bookingStatus=" + bookingStatus +
-                ", memberList=" + memberList +
+                ", member=" + member +
                 ", vaccinationCenters=" + vaccinationCenters +
                 '}';
     }

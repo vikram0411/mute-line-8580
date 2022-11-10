@@ -8,7 +8,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer memberId;
     private boolean dose1Status;
     private boolean dose2Status;
     private LocalDate dose1Date;
@@ -16,22 +16,16 @@ public class Member {
     @Embedded
     private IdCard idCard;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
     private Appointment appointment;
 
-    @Embedded
-    private VaccineRegistration vaccineRegistration;
 
-    public Member() {
-
+    public Integer getMemberId() {
+        return memberId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
     }
 
     public boolean isDose1Status() {
@@ -82,36 +76,29 @@ public class Member {
         this.appointment = appointment;
     }
 
-    public VaccineRegistration getVaccineRegistration() {
-        return vaccineRegistration;
-    }
-
-    public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
-        this.vaccineRegistration = vaccineRegistration;
-    }
-
-    public Member(Integer id, boolean dose1Status, boolean dose2Status, LocalDate dose1Date, LocalDate dose2Date, IdCard idCard, Appointment appointment, VaccineRegistration vaccineRegistration) {
-        this.id = id;
+    public Member(Integer memberId, boolean dose1Status, boolean dose2Status, LocalDate dose1Date, LocalDate dose2Date, IdCard idCard, Appointment appointment) {
+        this.memberId = memberId;
         this.dose1Status = dose1Status;
         this.dose2Status = dose2Status;
         this.dose1Date = dose1Date;
         this.dose2Date = dose2Date;
         this.idCard = idCard;
         this.appointment = appointment;
-        this.vaccineRegistration = vaccineRegistration;
+    }
+
+    public Member() {
     }
 
     @Override
     public String toString() {
         return "Member{" +
-                "id=" + id +
+                "memberId=" + memberId +
                 ", dose1Status=" + dose1Status +
                 ", dose2Status=" + dose2Status +
                 ", dose1Date=" + dose1Date +
                 ", dose2Date=" + dose2Date +
                 ", idCard=" + idCard +
                 ", appointment=" + appointment +
-                ", vaccineRegistration=" + vaccineRegistration +
                 '}';
     }
 }

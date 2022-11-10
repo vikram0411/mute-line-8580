@@ -17,7 +17,7 @@ public class VaccinationCenter {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Appointment>appointmentList=new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL )
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "vaccinationCenters")
     private List<Vaccine>vaccines=new ArrayList<>();
 
     public Integer getCode() {

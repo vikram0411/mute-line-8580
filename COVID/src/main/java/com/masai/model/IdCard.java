@@ -6,9 +6,6 @@ import java.time.LocalDate;
 
 public class IdCard {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Integer id;
     private String name;
     private LocalDate DOB;
     private String gender;
@@ -18,16 +15,7 @@ public class IdCard {
     private PanCard panCard;
     @Embedded
     private AdharCard adharCard;
-    @Embedded
-    private Member member;
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -77,36 +65,27 @@ public class IdCard {
         this.adharCard = adharCard;
     }
 
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
-
-    public IdCard( String name, LocalDate DOB, String gender, Address address, PanCard panCard, AdharCard adharCard, Member member) {
-//        this.id = id;
+    public IdCard(String name, LocalDate DOB, String gender, Address address, PanCard panCard, AdharCard adharCard) {
         this.name = name;
         this.DOB = DOB;
         this.gender = gender;
         this.address = address;
         this.panCard = panCard;
         this.adharCard = adharCard;
-        this.member = member;
+    }
+
+    public IdCard() {
     }
 
     @Override
     public String toString() {
         return "IdCard{" +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", DOB=" + DOB +
                 ", gender='" + gender + '\'' +
                 ", address=" + address +
                 ", panCard=" + panCard +
                 ", adharCard=" + adharCard +
-                ", member=" + member +
                 '}';
     }
 }
