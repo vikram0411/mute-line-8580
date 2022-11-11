@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class IdCard {
 
+	
     private String name;
     private LocalDate DOB;
     private String gender;
@@ -15,9 +16,29 @@ public class IdCard {
     private PanCard panCard;
     @Embedded
     private AdharCard adharCard;
+    
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Member member;
 
+    
+    
+//    public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
-    public String getName() {
+//	public Member getMember() {
+//		return member;
+//	}
+//
+//	public void setMember(Member member) {
+//		this.member = member;
+//	}
+
+	public String getName() {
         return name;
     }
 

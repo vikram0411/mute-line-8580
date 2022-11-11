@@ -2,19 +2,21 @@ package com.masai.services;
 
 import java.util.List;
 
+import com.masai.exception.AppointmentException;
 import com.masai.model.Appointment;
+import com.masai.model.Member;
 
 public interface AppointmentService {
     
-	public List<Appointment> allAppintment();
+	public List<Appointment> allAppintment()throws AppointmentException;
 	
-	public  Appointment getAppointment (long bookingid);
+	public  Appointment getAppointment (Integer bookingid) throws AppointmentException;
 
-	public  Appointment addAppointment ( Appointment app);
+	public  Appointment addAppointment ( Member member,Appointment app)throws AppointmentException;
 	
-	public  Appointment updateAppointment ( Appointment app);
+	public  Appointment updateAppointment ( Member member,Appointment app)throws AppointmentException;
 
-	public boolean deleteAppointment (Appointment app);
+	public boolean deleteAppointment (Appointment app)throws AppointmentException;
 	
 }
 
