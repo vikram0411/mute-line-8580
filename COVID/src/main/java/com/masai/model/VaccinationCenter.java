@@ -10,16 +10,18 @@ public class VaccinationCenter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer code;
+    //keeping as identifier
     private String centerName;
     @Embedded
     private Address address;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Appointment>appointmentList=new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Appointment appointment;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "vaccinationCenters")
-    private List<Vaccine>vaccines=new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccinationCenter")
+    private Vaccine vaccines;
 
+    
     public Integer getCode() {
         return code;
     }
@@ -44,41 +46,43 @@ public class VaccinationCenter {
         this.address = address;
     }
 
-    public List<Appointment> getAppointmentList() {
-        return appointmentList;
+
+
+    public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public Vaccine getVaccines() {
+		return vaccines;
+	}
+
+	public void setVaccines(Vaccine vaccines) {
+		this.vaccines = vaccines;
+	}
+
+	public VaccinationCenter() {
     }
 
-    public void setAppointmentList(List<Appointment> appointmentList) {
-        this.appointmentList = appointmentList;
-    }
+	public VaccinationCenter(Integer code, String centerName, Address address, Appointment appointment,
+			Vaccine vaccines) {
+		super();
+		this.code = code;
+		this.centerName = centerName;
+		this.address = address;
+		this.appointment = appointment;
+		this.vaccines = vaccines;
+	}
 
-    public List<Vaccine> getVaccines() {
-        return vaccines;
-    }
+	@Override
+	public String toString() {
+		return "VaccinationCenter [code=" + code + ", centerName=" + centerName + ", address=" + address
+				+ ", appointment=" + appointment + ", vaccines=" + vaccines + "]";
+	}
 
-    public void setVaccines(List<Vaccine> vaccines) {
-        this.vaccines = vaccines;
-    }
+	
 
-    public VaccinationCenter(Integer code, String centerName, Address address, List<Appointment> appointmentList, List<Vaccine> vaccines) {
-        this.code = code;
-        this.centerName = centerName;
-        this.address = address;
-        this.appointmentList = appointmentList;
-        this.vaccines = vaccines;
-    }
-
-    public VaccinationCenter() {
-    }
-
-    @Override
-    public String toString() {
-        return "VaccinationCenter{" +
-                "code=" + code +
-                ", centerName='" + centerName + '\'' +
-                ", address=" + address +
-                ", appointmentList=" + appointmentList +
-                ", vaccines=" + vaccines +
-                '}';
-    }
 }
