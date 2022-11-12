@@ -6,7 +6,7 @@ public class AdharCard {
     private String fingerprints;
     private String irisScan;
 
-
+    
     public String getAdharNo() {
         return adharNo;
     }

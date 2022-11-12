@@ -12,15 +12,15 @@ public class Vaccine {
     private Integer vaccineId;
     private String vaccninName;
     private String description;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<VaccinationCenter>vaccinationCenters=new ArrayList<>();
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private VaccinationCenter vaccinationCenter ;
 
 
     @Embedded
     private VaccineInventory vaccineInventory;
 
-    @Embedded
-    private VaccineCount vaccineCount;
+    
 
     public Integer getVaccineId() {
         return vaccineId;
@@ -46,12 +46,12 @@ public class Vaccine {
         this.description = description;
     }
 
-    public List<VaccinationCenter> getVaccinationCenters() {
-        return vaccinationCenters;
+    public VaccinationCenter getVaccinationCenters() {
+        return vaccinationCenter;
     }
 
-    public void setVaccinationCenters(List<VaccinationCenter> vaccinationCenters) {
-        this.vaccinationCenters = vaccinationCenters;
+    public void setVaccinationCenters(VaccinationCenter vaccinationCenter) {
+        this.vaccinationCenter = vaccinationCenter;
     }
 
     public VaccineInventory getVaccineInventory() {
@@ -62,21 +62,14 @@ public class Vaccine {
         this.vaccineInventory = vaccineInventory;
     }
 
-    public VaccineCount getVaccineCount() {
-        return vaccineCount;
-    }
+  
 
-    public void setVaccineCount(VaccineCount vaccineCount) {
-        this.vaccineCount = vaccineCount;
-    }
-
-    public Vaccine(Integer vaccineId, String vaccninName, String description, List<VaccinationCenter> vaccinationCenters, VaccineInventory vaccineInventory, VaccineCount vaccineCount) {
+    public Vaccine(Integer vaccineId, String vaccninName, String description,VaccinationCenter vaccinationCenter, VaccineInventory vaccineInventory) {
         this.vaccineId = vaccineId;
         this.vaccninName = vaccninName;
         this.description = description;
-        this.vaccinationCenters = vaccinationCenters;
+        this.vaccinationCenter = vaccinationCenter;
         this.vaccineInventory = vaccineInventory;
-        this.vaccineCount = vaccineCount;
     }
 
     public Vaccine() {
@@ -88,9 +81,9 @@ public class Vaccine {
                 "vaccineId=" + vaccineId +
                 ", vaccninName='" + vaccninName + '\'' +
                 ", description='" + description + '\'' +
-                ", vaccinationCenters=" + vaccinationCenters +
+                ", vaccinationCenter=" + vaccinationCenter +
                 ", vaccineInventory=" + vaccineInventory +
-                ", vaccineCount=" + vaccineCount +
+                
                 '}';
     }
 }
