@@ -3,10 +3,12 @@ package com.masai.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-
+//@Entity
 public class IdCard {
 
-	
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Integer IdCardId;
     private String name;
     private LocalDate DOB;
     private String gender;

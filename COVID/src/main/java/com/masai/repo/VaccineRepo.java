@@ -11,8 +11,8 @@ import com.masai.model.Vaccine;
 public interface VaccineRepo  extends JpaRepository<Vaccine, Integer>{
 
 	//for inventory
-	@Query("select v from Vaccine v where vaccninName=?1 ")
-	public List<Vaccine> getVaccinesrByName(String vaccineName);
+//	@Query("select v from Vaccine v where vaccninName=?1 ")
+//	public Vaccine getVaccinesrByName(String vaccineName);
 	
 	//for vaccine
 	@Query("select v from Vaccine v where vaccninName=?1 ")

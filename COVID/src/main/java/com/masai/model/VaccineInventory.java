@@ -38,6 +38,8 @@ public class VaccineInventory {
 		this.vaccineCount = vaccineCount;
 	}
 
-    
+    public VaccineInventory() {
+		// TODO Auto-generated constructor stub
+	}
     
 }

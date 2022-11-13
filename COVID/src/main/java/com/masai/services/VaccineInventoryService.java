@@ -9,19 +9,19 @@ import com.masai.model.VaccineInventory;
 
 public interface VaccineInventoryService {
     
-	public List<VaccineInventory> allVaccineInventory () throws VaccineInventoryException;
-	
-	public  VaccineInventory getVaccineinventoryByCenter (Integer centerid) throws VaccineInventoryException;
-
-	public  VaccineInventory addVaccineCount ( Vaccine inv ,Integer Quantity)throws VaccineInventoryException;
-
-	public  VaccineInventory updateVaccineinventory ( Vaccine	inv)throws VaccineInventoryException; 
-
-	public boolean deleteVaccinelnventory ( Vaccine inv )throws VaccineInventoryException;
-
-	public List<Vaccine> getVaccineinventoryByDate (LocalDate date )throws VaccineInventoryException;
-
-	public List< VaccineInventory> getVaccineinventoryByVaccine (Vaccine vaccine)throws VaccineInventoryException;
+//	public List<VaccineInventory> allVaccineInventory () throws VaccineInventoryException;
+//	
+//	public  VaccineInventory getVaccineinventoryByCenter (Integer centerid) throws VaccineInventoryException;
+//
+//	public  VaccineInventory addVaccineCount ( Vaccine inv ,Integer Quantity)throws VaccineInventoryException;
+//
+//	public  VaccineInventory updateVaccineinventory ( Vaccine	inv)throws VaccineInventoryException; 
+//
+//	public boolean deleteVaccinelnventory ( Vaccine inv )throws VaccineInventoryException;
+//
+//	public List<Vaccine> getVaccineinventoryByDate (LocalDate date )throws VaccineInventoryException;
+//
+//	public List< VaccineInventory> getVaccineinventoryByVaccine (Vaccine vaccine)throws VaccineInventoryException;
 
 
 	

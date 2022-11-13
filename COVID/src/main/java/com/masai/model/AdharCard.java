@@ -5,7 +5,6 @@ public class AdharCard {
     private String adharNo;
     private String fingerprints;
     private String irisScan;
-
     
     public String getAdharNo() {
         return adharNo;
@@ -26,11 +25,9 @@ public class AdharCard {
     public String getIrisScan() {
         return irisScan;
     }
-
     public void setIrisScan(String irisScan) {
         this.irisScan = irisScan;
     }
-
     public AdharCard(String adharNo, String fingerprints, String irisScan) {
         this.adharNo = adharNo;
         this.fingerprints = fingerprints;

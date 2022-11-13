@@ -14,8 +14,8 @@ public class Member {
     private LocalDate dose1Date;
     private LocalDate dose2Date;
     
-	//    @OneToOne(cascade = CascadeType.ALL)
     @Embedded
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
     private IdCard idCard;
   
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
@@ -51,6 +51,7 @@ public class Member {
         this.dose2Status = dose2Status;
     }
 
+
     public LocalDate getDose1Date() {
         return dose1Date;
     }
@@ -58,7 +59,7 @@ public class Member {
     public void setDose1Date(LocalDate dose1Date) {
         this.dose1Date = dose1Date;
     }
-
+//
     public LocalDate getDose2Date() {
         return dose2Date;
     }
@@ -66,7 +67,7 @@ public class Member {
     public void setDose2Date(LocalDate dose2Date) {
         this.dose2Date = dose2Date;
     }
-
+	
     public IdCard getIdCard() {
         return idCard;
     }
@@ -86,6 +87,8 @@ public class Member {
 
     public Member() {
     }
+
+	
 
 	@Override
 	public String toString() {
@@ -113,8 +116,11 @@ public class Member {
 	
 	this.vaccineRegistration = vaccineRegistration;
 }
-
+//
 	public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
 		this.vaccineRegistration = vaccineRegistration;
 	}
+    
+    
+    
 }

@@ -15,13 +15,16 @@ public class Appointment {
     private LocalDate dateOfBooking;
     private Slot slot;
     private boolean bookingStatus;
-    
-    
+     
+    public Appointment() {
+		// TODO Auto-generated constructor stub
+	}
     
     @OneToOne(cascade = CascadeType.ALL)
     private Member member;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "appointment")
+    @ManyToOne(cascade = CascadeType.ALL )
+    
     private VaccinationCenter vaccinationCenters;
 
 	public Integer getBookingId() {
