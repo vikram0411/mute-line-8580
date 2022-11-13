@@ -15,6 +15,7 @@ import com.masai.model.ShowAppointment;
 import com.masai.model.VaccinationCenter;
 import com.masai.repo.AppointmentRepo;
 import com.masai.repo.MemberRepo;
+import com.masai.repo.VaccinationCenterRepo;
 
 @Service
 public class AppintmentServiceImpl implements AppointmentService{
@@ -23,6 +24,8 @@ public class AppintmentServiceImpl implements AppointmentService{
 	private AppointmentRepo ar;
 	@Autowired
 	private MemberRepo mr;
+	@Autowired
+	private VaccinationCenterRepo vcr;
 //	
 	@Override
 	public ShowAppointment getAppointment(Integer bookingid) throws AppointmentException {
@@ -31,12 +34,14 @@ public class AppintmentServiceImpl implements AppointmentService{
 		if(am.isPresent()) {
 			Appointment a= am.get();
 			
+//			 ShowAppointment sa= new ShowAppointment();
 			 ShowAppointment sa= new ShowAppointment();
-			    sa.setBookingId(a.getBookingId());
-			    sa.setBookingStatus(a.isBookingStatus());
-			    sa.setDateOfBooking(a.getDateOfBooking());
-			    sa.setMemberId(a.getMember().getMemberId());
-			    sa.setMobileNo(a.getMobileNo());
+				sa.setBookingId(a.getBookingId());
+				sa.setBookingStatus(a.isBookingStatus());
+				sa.setDateOfBooking(a.getDateOfBooking());
+				sa.setMemberId(a.getMember().getMemberId());
+				sa.setMobileNo(a.getMobileNo());
+				sa.setVaccinationCenterCode(a.getVaccinationCenters().getCode());
 			    return  sa;
 		}
 		else {
@@ -45,19 +50,21 @@ public class AppintmentServiceImpl implements AppointmentService{
 	}
 //
 	@Override
-	public ShowAppointment addAppointment(Integer memberid,Appointment app,VaccinationCenter vc) throws AppointmentException {
+	public ShowAppointment addAppointment(Integer memberid,Appointment app,Integer vc) throws AppointmentException {
 		// TODO Auto-generated method stub
 		Optional<Member> m= mr.findById(memberid);
 		if(m.isPresent()) {
 			if(m.get().getAppointment()==null) {
 				app.setMember(m.get());
 				
-				Optional<Appointment> apoi= ar.findById(app.getBookingId());
+				
+				Optional<VaccinationCenter> apoi= vcr.findById(vc);
 				
 				if(apoi.isPresent()) {
 					
+					app.setVaccinationCenters(apoi.get());;
 					Appointment a=ar.save(app);
-//				m.get().setAppointment(app);
+				m.get().setAppointment(app);
 					
 //				mr.save(m.get());
 					ShowAppointment sa= new ShowAppointment();
@@ -66,10 +73,11 @@ public class AppintmentServiceImpl implements AppointmentService{
 					sa.setDateOfBooking(a.getDateOfBooking());
 					sa.setMemberId(a.getMember().getMemberId());
 					sa.setMobileNo(a.getMobileNo());
-					
+					sa.setVaccinationCenterCode(vc);
+
 					return sa;
 				}else {
-					throw new AppointmentException("ticket id is wrong");	
+					throw new AppointmentException("no vaccination center present with id : "+vc);	
 				}
 				
 				
@@ -95,17 +103,21 @@ public class AppintmentServiceImpl implements AppointmentService{
 				apo.get().setDateOfBooking(LocalDate.now());   
 				apo.get().setMobileNo(app.getMobileNo());
 				apo.get().setSlot(app.getSlot());
-				apo.get().setVaccinationCenters(app.getVaccinationCenters());
+//				apo.get().setVaccinationCenters(app.getVaccinationCenters());
 				ar.save(apo.get());
 //				m.get().setAppointment(app);
 //				mr.save(m.get());
 			    ShowAppointment sa= new ShowAppointment();
 			    sa.setBookingId(apo.get().getBookingId());
 			    sa.setBookingStatus(apo.get().isBookingStatus());
-			    sa.setDateOfBooking(apo.get().getDateOfBooking());
-			    sa.setMemberId(mid);
-			    
 			    sa.setMobileNo(apo.get().getMobileNo());
+//			    sa.setDateOfBooking(apo.get().getDateOfBooking());
+//			    sa.setMemberId(mid);
+			    
+//				sa.setMemberId(a.getMember().getMemberId());
+//				sa.setVaccinationCenterCode(apo.get().getVaccinationCenters().getCode());
+			    
+//			    sa.setMobileNo(apo.get().getMobileNo());
 				return sa;
 				
 //				return app;
@@ -152,7 +164,8 @@ public class AppintmentServiceImpl implements AppointmentService{
 		    s.setBookingStatus(a.isBookingStatus());
 		    s.setDateOfBooking(a.getDateOfBooking());
 		    s.setMemberId(a.getMember().getMemberId());
-		    s.setMobileNo(a.getMobileNo());	
+		    s.setMobileNo(a.getMobileNo());
+		    s.setVaccinationCenterCode(a.getVaccinationCenters().getCode());
 		    sa.add(s);
 		}
 		

@@ -1,5 +1,6 @@
 package com.masai.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exception.VaccineException;
+import com.masai.model.ShowVaccine;
 import com.masai.model.VaccinationCenter;
 import com.masai.model.Vaccine;
 import com.masai.repo.VaccinationCenterRepo;
@@ -23,12 +25,28 @@ public class VaccineServiceImpl implements VaccineService {
 	private VaccinationCenterRepo vcr;
 	
 	@Override
-	public Vaccine getVaccineByName(String vaccineName) throws VaccineException {
+	public List<ShowVaccine> getVaccineByName(String vaccineName) throws VaccineException {
 		// TODO Auto-generated method stub
-		Vaccine c=vr.getVaccinerByName(vaccineName);
+		List<Vaccine> c=vr.getVaccinerByName(vaccineName);
+		if(c.size()>0) {
 		
-		if(c!=null) {
-			return c;
+		List<ShowVaccine> sv = new ArrayList<>();
+		
+		for(Vaccine v:c) {
+//			sv.add)
+			ShowVaccine sv2 = new ShowVaccine();
+			sv2.setVaccineId(v.getVaccineId());
+			sv2.setVaccninName(v.getVaccninName());
+			sv2.setDescription(v.getDescription());
+			sv2.setPrice(v.getVaccineInventory().getVaccineCount().getPrice());
+			sv2.setDate(v.getVaccineInventory().getDate());
+			sv2.setQuantity(v.getVaccineInventory().getVaccineCount().getQuantity());
+			sv2.setVaccinecenterId(v.getVaccineId());
+			
+			sv.add(sv2);
+		}
+		
+			return sv;
 		}else {
 			throw new VaccineException("no vaccine found with this vaccine name");
 		}
@@ -36,12 +54,24 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 //
 	@Override
-	public Vaccine getVaccinebyld(Integer vaccineld) throws VaccineException {
+	public ShowVaccine getVaccinebyld(Integer vaccineld) throws VaccineException {
 		// TODO Auto-generated method stub
         Optional<Vaccine> c=vr.findById(vaccineld);
 		
+        
 		if(c.isPresent()) {
-			return c.get();
+			ShowVaccine sv2 = new ShowVaccine();
+			sv2.setVaccineId(c.get().getVaccineId());
+			sv2.setVaccninName(c.get().getVaccninName());
+			sv2.setDescription(c.get().getDescription());
+			sv2.setPrice(c.get().getVaccineInventory().getVaccineCount().getPrice());
+			sv2.setDate(c.get().getVaccineInventory().getDate());
+			sv2.setQuantity(c.get().getVaccineInventory().getVaccineCount().getQuantity());
+			sv2.setVaccinecenterId(c.get().getVaccineId());
+			
+//			sv.add(sv2);
+			
+			return sv2;
 		}else {
 			throw new VaccineException("no vaccine found by vaccine id"+vaccineld);
 		}
@@ -50,23 +80,34 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 
 	@Override
-	public Vaccine addVaccine(Vaccine vaccine,Integer VaccinneCenterId) throws VaccineException {
+	public ShowVaccine addVaccine(Vaccine vaccine,Integer VaccinneCenterId) throws VaccineException {
 		// TODO Auto-generated method stub
 		
 		Optional<VaccinationCenter> vaccen= vcr.findById(VaccinneCenterId);
 		
 		if(vaccen.isPresent()) {
 			
-			Vaccine c=vr.getVaccinerByName(vaccine.getVaccninName());
+//			Vaccine c=vr.getVaccinerByName(vaccine.getVaccninName());
 			
 			
-			if(c!=null) {
-				throw new VaccineException("a vaccine is already present with vaccine name"+vaccine.getVaccninName());
+			if(vaccen.get().getVaccines()!=null) {
+				throw new VaccineException("a vaccine is already present with vaccine name : "+vaccine.getVaccninName());
 			}else {
 				vaccine.setVaccinationCenters(vaccen.get());
 				vaccen.get().setVaccines(vaccine);
-				 vcr.save(vaccen.get());
-				return vr.save(vaccine);
+//				 vcr.save(vaccen.get());
+				vr.save(vaccine);
+				
+				ShowVaccine sv= new ShowVaccine();
+				sv.setVaccineId(vaccine.getVaccineId());
+				sv.setVaccninName(vaccine.getVaccninName());
+				sv.setDescription(vaccine.getDescription());
+				sv.setPrice(vaccine.getVaccineInventory().getVaccineCount().getPrice());
+				sv.setDate(vaccine.getVaccineInventory().getDate());
+				sv.setQuantity(vaccine.getVaccineInventory().getVaccineCount().getQuantity());
+				sv.setVaccinecenterId(VaccinneCenterId);
+		
+				return sv;
 			}
 		}else {
 			throw new VaccineException("No vacinationCenter present with id"+VaccinneCenterId	);
@@ -74,7 +115,7 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 //
 	@Override
-	public Vaccine updateVaccine(Vaccine vaccine) throws VaccineException {
+	public ShowVaccine updateVaccine(Vaccine vaccine) throws VaccineException {
 		
 		// TODO Auto-generated method stub
 		 Optional<Vaccine> c=vr.findById(vaccine.getVaccineId());
@@ -85,7 +126,18 @@ public class VaccineServiceImpl implements VaccineService {
 				v.setVaccinationCenters(vaccine.getVaccinationCenters());
 				v.setVaccineInventory(vaccine.getVaccineInventory());
 				v.setVaccninName(vaccine.getVaccninName());
-				return vr.save(v);
+				vr.save(v);
+				
+				ShowVaccine sv= new ShowVaccine();
+				sv.setVaccineId(vaccine.getVaccineId());
+				sv.setVaccninName(vaccine.getVaccninName());
+				sv.setDescription(vaccine.getDescription());
+				sv.setPrice(vaccine.getVaccineInventory().getVaccineCount().getPrice());
+				sv.setDate(vaccine.getVaccineInventory().getDate());
+				sv.setQuantity(vaccine.getVaccineInventory().getVaccineCount().getQuantity());
+				sv.setVaccinecenterId(vaccine.getVaccineId());
+				
+				return sv;
 				
 			}else {
 				throw new VaccineException("no vaccine found for updation by vaccine id");
@@ -111,11 +163,28 @@ public class VaccineServiceImpl implements VaccineService {
 	
 	
 	@Override
-	public List<Vaccine> allVaccine() throws VaccineException {
+	public List<ShowVaccine> allVaccine() throws VaccineException {
 		// TODO Auto-generated method stub
-		List<Vaccine> lv=vr.findAll();
-		if(lv.size()>0){
-			return lv;
+		List<Vaccine> c=vr.findAll();
+		
+		if(c.size()>0) {
+       List<ShowVaccine> sv = new ArrayList<>();
+		
+		for(Vaccine v:c) {
+//			sv.add)
+			ShowVaccine sv2 = new ShowVaccine();
+			sv2.setVaccineId(v.getVaccineId());
+			sv2.setVaccninName(v.getVaccninName());
+			sv2.setDescription(v.getDescription());
+			sv2.setPrice(v.getVaccineInventory().getVaccineCount().getPrice());
+			sv2.setDate(v.getVaccineInventory().getDate());
+			sv2.setQuantity(v.getVaccineInventory().getVaccineCount().getQuantity());
+			sv2.setVaccinecenterId(v.getVaccineId());
+			
+			sv.add(sv2);
+		}
+		
+			return sv;
 		}else {
 			throw new VaccineException("no vaccine found ");
 		}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exception.MemberException;
 import com.masai.model.Member;
+import com.masai.model.MemberShow;
 import com.masai.repo.MemberRepo;
 import com.masai.services.MemberService;
 
@@ -31,37 +32,41 @@ public class MemberController {
 	    public String hii() {
 	    	return "hii";
 	    }
-	
+	       
 		@PutMapping("/addMember")
-		public Member addMember( @RequestBody Member mb) throws MemberException {
+		public MemberShow addMember( @RequestBody Member mb) throws MemberException {
 			
-			Member ad =  mService.addMember(mb);
+			MemberShow ad =  mService.addMember(mb);
 			
 			return ad  ;
 		}
 		
+		
+		//done
 		@GetMapping("/allMembers")
-		public ResponseEntity<List<Member>> allMember()throws MemberException {
+		public ResponseEntity<List<MemberShow>> allMember()throws MemberException {
 
-			List<Member> mb = mService.allMember();
+			List<MemberShow> mb = mService.allMember();
 			return new ResponseEntity<>(mb,HttpStatus.ACCEPTED);
 		}
 //		
+		
+        //done		
 		@GetMapping("/MemberById/{id}")
-		public ResponseEntity<Member> FindByIdHandler(@PathVariable Integer id) throws MemberException{
+		public ResponseEntity<MemberShow> FindByIdHandler(@PathVariable Integer id) throws MemberException{
 			
-		Member member=	mService.getMemberByld(id);
-		return new ResponseEntity<Member>(member,HttpStatus.FOUND);
+		MemberShow member=	mService.getMemberByld(id);
+		return new ResponseEntity<MemberShow>(member,HttpStatus.FOUND);
 		
 			
 		}
 
 //		dikkat:done 
 		@GetMapping("/MemberByAdhar/{AdharNo}")
-		public ResponseEntity<Member> FindByAdharMemberHandler(@PathVariable String AdharNo) throws MemberException{
+		public ResponseEntity<MemberShow> FindByAdharMemberHandler(@PathVariable String AdharNo) throws MemberException{
 			
-		Member member=	mService.getMemberByAdharNo(AdharNo);
-		return new ResponseEntity<Member>(member,HttpStatus.FOUND);
+		MemberShow member=	mService.getMemberByAdharNo(AdharNo);
+		return new ResponseEntity<MemberShow>(member,HttpStatus.FOUND);
 		
 			
 		}
@@ -69,19 +74,19 @@ public class MemberController {
 //		
 		
 		@GetMapping("/MemberByPan/{PanNo}")
-		public ResponseEntity<Member> FindByPanMemberHandler(@PathVariable String PanNo) throws MemberException{
+		public ResponseEntity<MemberShow> FindByPanMemberHandler(@PathVariable String PanNo) throws MemberException{
 			
-		Member member=	mService.getMemberByPanNo(PanNo);
-		return new ResponseEntity<Member>(member,HttpStatus.FOUND);
+		MemberShow member=	mService.getMemberByPanNo(PanNo);
+		return new ResponseEntity<MemberShow>(member,HttpStatus.FOUND);
 		
 			
 		}
 //		
 		@PutMapping("/Member")
-		public ResponseEntity<Member> UpdateMemberHandler(@RequestBody Member member) throws MemberException{
-			Member memb=mService.updateMember(member);
+		public ResponseEntity<MemberShow> UpdateMemberHandler(@RequestBody Member member) throws MemberException{
+			MemberShow memb=mService.updateMember(member);
 			
-			return new ResponseEntity<Member>(memb,HttpStatus.FOUND);
+			return new ResponseEntity<MemberShow>(memb,HttpStatus.FOUND);
 		}
 //		
 		/// changes possible :- runs but thinking of changing parameter to something easy

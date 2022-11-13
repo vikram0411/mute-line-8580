@@ -43,7 +43,7 @@ public class AppointmentController {
 //		//Add appointments
 //
 		@PutMapping("/addAppointment/{memberid}/{vc}")
-		public ResponseEntity<ShowAppointment> addAppointmentOnly( @PathVariable("memberid") Integer memberid ,@PathVariable VaccinationCenter vc,@RequestBody Appointment ap ) throws VaccineRgistrationException, MemberException, AppointmentException {
+		public ResponseEntity<ShowAppointment> addAppointmentOnly( @PathVariable("memberid") Integer memberid ,@PathVariable Integer vc,@RequestBody Appointment ap ) throws VaccineRgistrationException, MemberException, AppointmentException {
 
 			ShowAppointment app = appointmentService.addAppointment(memberid,ap,vc) ;
 			return new ResponseEntity<ShowAppointment>(app,HttpStatus.ACCEPTED);

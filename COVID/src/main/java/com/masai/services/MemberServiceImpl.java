@@ -1,5 +1,8 @@
+
 package com.masai.services;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.masai.controller.MemberController;
 import com.masai.exception.MemberException;
 import com.masai.model.Member;
+import com.masai.model.MemberShow;
 import com.masai.repo.MemberRepo;
 
 
@@ -23,13 +27,48 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public List<Member> allMember() throws MemberException {
+	public List<MemberShow> allMember() throws MemberException {
 		// TODO Auto-generated method stub
 		
 		
 		List<Member> l1 = mr.findAll();
+		List<MemberShow> ms = new  ArrayList<>();
+		
 		if(l1.size()>0) {
-			return l1;
+			
+			for(Member m:l1) {
+				
+				MemberShow mems= new MemberShow();
+//				mems.setCity(m.getIdCard().getAddress().getCity());
+				  mems.setDose1Status(m.isDose1Status());
+				  mems.setDose2Status(m.isDose2Status());
+				  mems.setDose1Date(m.getDose1Date());
+				  mems.setDose2Date(m.getDose2Date());
+				  mems.setName(m.getIdCard().getName());
+				  mems.setDOB(m.getIdCard().getDOB());
+				  mems.setGender(m.getIdCard().getGender());
+				  mems.setCity(m.getIdCard().getAddress().getCity());
+				  mems.setState(m.getIdCard().getAddress().getState());
+				  mems.setPinCode(m.getIdCard().getAddress().getPinCode());
+                  mems.setPanNo(m.getIdCard().getPanCard().getPanNo());
+                  mems.setAdharNo(m.getIdCard().getAdharCard().getAdharNo());
+                  mems.setFingerprints(m.getIdCard().getAdharCard().getFingerprints());
+                  mems.setIrisScan(m.getIdCard().getAdharCard().getIrisScan());
+                  mems.setMobileNo(m.getVaccineRegistration().getMobileNo());
+                  mems.setDateOfRegistration(LocalDate.now());
+//                  if(m.getAppointment().getBookingId()==null) {
+//                	  
+//                  }else {
+//                	  
+//                	  mems.setAppointmentId(m.getAppointment().getBookingId());
+//                  }
+//                  private long mobileNo;
+//          	    private LocalDate dateOfRegistration;
+//                  private Integer  appointmentId;
+				ms.add(mems);
+			}
+			
+			return ms;
 		}
 		else {
 			throw new MemberException("no member found");
@@ -37,12 +76,40 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member getMemberByld(Integer idcardid) throws MemberException {
+	public MemberShow getMemberByld(Integer idcardid) throws MemberException {
 		// TODO Auto-generated method stub
 	    Optional<Member> m= mr.findById(idcardid);
 		
 	    if(m.isPresent()) {
-	    	return m.get();
+	    	
+	    	MemberShow mems= new MemberShow();
+//			mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setDose1Status(m.get().isDose1Status());
+			  mems.setDose2Status(m.get().isDose2Status());
+			  mems.setDose1Date(m.get().getDose1Date());
+			  mems.setDose2Date(m.get().getDose2Date());
+			  mems.setName(m.get().getIdCard().getName());
+			  mems.setDOB(m.get().getIdCard().getDOB());
+			  mems.setGender(m.get().getIdCard().getGender());
+			  mems.setCity(m.get().getIdCard().getAddress().getCity());
+			  mems.setState(m.get().getIdCard().getAddress().getState());
+			  mems.setPinCode(m.get().getIdCard().getAddress().getPinCode());
+              mems.setPanNo(m.get().getIdCard().getPanCard().getPanNo());
+              mems.setAdharNo(m.get().getIdCard().getAdharCard().getAdharNo());
+              mems.setFingerprints(m.get().getIdCard().getAdharCard().getFingerprints());
+              mems.setIrisScan(m.get().getIdCard().getAdharCard().getIrisScan());
+              mems.setMobileNo(m.get().getVaccineRegistration().getMobileNo());
+              mems.setDateOfRegistration(m.get().getVaccineRegistration().getDateOfRegistration());
+//              if(m.get().getAppointment().getBookingId()==null) {
+////            	  
+//              }
+//            	  else {
+//            	  
+//            	  mems.setAppointmentId(m.get().getAppointment().getBookingId());
+//              }
+//              mems.setAppointmentId(m.get().getAppointment().getBookingId());
+	    	  
+	    	return mems;
 	    }
 	    else {
 	    	throw new MemberException("no member found by id "+idcardid);
@@ -50,13 +117,40 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member getMemberByAdharNo(String adharno) throws MemberException {
+	public MemberShow getMemberByAdharNo(String adharno) throws MemberException {
 		// TODO Auto-generated method stub
 		
 	   Member m=mr.getMemberByAdhar(adharno);
 	  
 	   if(m !=null) {
-	    	return m;
+//	    	return m;
+			MemberShow mems= new MemberShow();
+//			mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setDose1Status(m.isDose1Status());
+			  mems.setDose2Status(m.isDose2Status());
+			  mems.setDose1Date(m.getDose1Date());
+			  mems.setDose2Date(m.getDose2Date());
+			  mems.setName(m.getIdCard().getName());
+			  mems.setDOB(m.getIdCard().getDOB());
+			  mems.setGender(m.getIdCard().getGender());
+			  mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setState(m.getIdCard().getAddress().getState());
+			  mems.setPinCode(m.getIdCard().getAddress().getPinCode());
+              mems.setPanNo(m.getIdCard().getPanCard().getPanNo());
+              mems.setAdharNo(m.getIdCard().getAdharCard().getAdharNo());
+              mems.setFingerprints(m.getIdCard().getAdharCard().getFingerprints());
+              mems.setIrisScan(m.getIdCard().getAdharCard().getIrisScan());
+              mems.setMobileNo(m.getVaccineRegistration().getMobileNo());
+              mems.setDateOfRegistration(m.getVaccineRegistration().getDateOfRegistration());
+//              mems.setAppointmentId(m.getAppointment().getBookingId());
+//              if(m.getAppointment().getBookingId()==null) {
+//            	  
+//              }else {
+//            	  
+//            	  mems.setAppointmentId(m.getAppointment().getBookingId());
+//              }
+//	    	
+	    	return mems;
 	    }
 	    else {
 	    	throw new MemberException("no member found by adharNo "+adharno);
@@ -64,13 +158,40 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member getMemberByPanNo(String panNo) throws MemberException {
+	public MemberShow getMemberByPanNo(String panNo) throws MemberException {
 		// TODO Auto-generated method stub
 		
 		Member m= mr.getMemberByPanNo(panNo);
 		
 		if(m !=null) {
-	    	return m;
+//	    	return m;
+			MemberShow mems= new MemberShow();
+//			mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setDose1Status(m.isDose1Status());
+			  mems.setDose2Status(m.isDose2Status());
+			  mems.setDose1Date(m.getDose1Date());
+			  mems.setDose2Date(m.getDose2Date());
+			  mems.setName(m.getIdCard().getName());
+			  mems.setDOB(m.getIdCard().getDOB());
+			  mems.setGender(m.getIdCard().getGender());
+			  mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setState(m.getIdCard().getAddress().getState());
+			  mems.setPinCode(m.getIdCard().getAddress().getPinCode());
+              mems.setPanNo(m.getIdCard().getPanCard().getPanNo());
+              mems.setAdharNo(m.getIdCard().getAdharCard().getAdharNo());
+              mems.setFingerprints(m.getIdCard().getAdharCard().getFingerprints());
+              mems.setIrisScan(m.getIdCard().getAdharCard().getIrisScan());
+              mems.setMobileNo(m.getVaccineRegistration().getMobileNo());
+              mems.setDateOfRegistration(m.getVaccineRegistration().getDateOfRegistration());
+//              mems.setAppointmentId(m.getAppointment().getBookingId());
+//              if(m.getAppointment().getBookingId()==null) {
+//            	  
+//              }else {
+//            	  
+//            	  mems.setAppointmentId(m.getAppointment().getBookingId());
+//              }
+	    	
+	    	return mems;
 	    }
 	    else {
 	    	throw new MemberException("no member found by PanNo "+panNo);
@@ -78,22 +199,44 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member addMember(Member member) throws MemberException {
+	public MemberShow addMember(Member member) throws MemberException {
 		// TODO Auto-generated method stub
 		
+		Member m2=mr.getMemberByAdhar(member.getIdCard().getAdharCard().getAdharNo());
 		
-//		 if(m != null){
-//		    	throw new MemberException("member already present with adharNo "+member.getIdCard().getAdharCard().getAdharNo());
-//		    }	 
-//	     else {
+		 if(m2 != null){
+		    	throw new MemberException("member already present with adharNo "+member.getIdCard().getAdharCard().getAdharNo());
+		    }	 
+	     else {
 		Member m=mr.save(member);
-	    	    return m;
-//		  }
+		MemberShow mems= new MemberShow();
+//		mems.setCity(m.getIdCard().getAddress().getCity());
+		  mems.setDose1Status(m.isDose1Status());
+		  mems.setDose2Status(m.isDose2Status());
+		  mems.setDose1Date(m.getDose1Date());
+		  mems.setDose2Date(m.getDose2Date());
+		  mems.setName(m.getIdCard().getName());
+		  mems.setDOB(m.getIdCard().getDOB());
+		  mems.setGender(m.getIdCard().getGender());
+		  mems.setCity(m.getIdCard().getAddress().getCity());
+		  mems.setState(m.getIdCard().getAddress().getState());
+		  mems.setPinCode(m.getIdCard().getAddress().getPinCode());
+          mems.setPanNo(m.getIdCard().getPanCard().getPanNo());
+          mems.setAdharNo(m.getIdCard().getAdharCard().getAdharNo());
+          mems.setFingerprints(m.getIdCard().getAdharCard().getFingerprints());
+          mems.setIrisScan(m.getIdCard().getAdharCard().getIrisScan());
+          mems.setMobileNo(m.getVaccineRegistration().getMobileNo());
+          mems.setDateOfRegistration(m.getVaccineRegistration().getDateOfRegistration());
+//          mems.setAppointmentId(null);
+    	
+    	return mems;
+//	    	    return m;
+		  }
 		
 	}
 
 	@Override
-	public Member updateMember(Member member) throws MemberException {
+	public MemberShow updateMember(Member member) throws MemberException {
 		// TODO Auto-generated method stub
 		
 		Optional<Member> m = mr.findById(member.getMemberId());
@@ -110,7 +253,30 @@ public class MemberServiceImpl implements MemberService{
 			m2.setIdCard(member.getIdCard());
 			m2.setVaccineRegistration(member.getVaccineRegistration());
 
-			return mr.save(m2);
+			mr.save(m2);
+			
+			MemberShow mems= new MemberShow();
+//			mems.setCity(m.getIdCard().getAddress().getCity());
+			  mems.setDose1Status(m2.isDose1Status());
+			  mems.setDose2Status(m2.isDose2Status());
+			  mems.setDose1Date(m2.getDose1Date());
+			  mems.setDose2Date(m2.getDose2Date());
+			  mems.setName(m2.getIdCard().getName());
+			  mems.setDOB(m2.getIdCard().getDOB());
+			  mems.setGender(m2.getIdCard().getGender());
+			  mems.setCity(m2.getIdCard().getAddress().getCity());
+			  mems.setState(m2.getIdCard().getAddress().getState());
+			  mems.setPinCode(m2.getIdCard().getAddress().getPinCode());
+              mems.setPanNo(m2.getIdCard().getPanCard().getPanNo());
+              mems.setAdharNo(m2.getIdCard().getAdharCard().getAdharNo());
+              mems.setFingerprints(m2.getIdCard().getAdharCard().getFingerprints());
+              mems.setIrisScan(m2.getIdCard().getAdharCard().getIrisScan());
+              mems.setMobileNo(m2.getVaccineRegistration().getMobileNo());
+              mems.setDateOfRegistration(m2.getVaccineRegistration().getDateOfRegistration());
+//              mems.setAppointmentId(m2.getAppointment().getBookingId());
+	    	
+	    	return mems;
+//			return 
 		    }	 
 	   else{
 	    	 throw new MemberException("No member found to update with  id  "+member.getMemberId());
@@ -135,6 +301,7 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	
 
 
 }

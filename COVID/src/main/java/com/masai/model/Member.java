@@ -13,6 +13,7 @@ public class Member {
     private boolean dose2Status;
     private LocalDate dose1Date;
     private LocalDate dose2Date;
+  
     
     @Embedded
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member")

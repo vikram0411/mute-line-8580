@@ -14,7 +14,7 @@ public interface AppointmentService {
 //	
 	public  ShowAppointment getAppointment (Integer bookingid) throws AppointmentException;
 //
-	public  ShowAppointment addAppointment (Integer memberid,Appointment app,VaccinationCenter vc)throws AppointmentException;
+	public  ShowAppointment addAppointment (Integer memberid,Appointment app,Integer vc)throws AppointmentException;
 //	
 	public boolean deleteAppointment (Integer mid, Integer app)throws AppointmentException;
 //	

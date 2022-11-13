@@ -20,7 +20,7 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 
 //	private VaccineInventoryRepo vir;
 //	private VaccineRepo vr;
-//	@Override
+////	@Override
 //	public VaccineInventory getVaccineinventoryByCenter(Integer centerid) throws VaccineInventoryException {
 //		// TODO Auto-generated method stub
 //		
@@ -153,9 +153,9 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 //		}else {
 //			throw new VaccineInventoryException("no VaccineInventory found ");	
 //		}
-//		
-//		
-//		
+////		
+////		
+////		
 //	}
 //
 //	

@@ -4,16 +4,17 @@ import java.util.List;
 
 import com.masai.exception.VaccinationCentreException;
 import com.masai.model.VaccinationCenter;
+import com.masai.model.VaccinationCenterShow;
 
 public interface VaccinationCenterService {
     
-	public List<VaccinationCenter> allVaccineCenters() throws VaccinationCentreException;
+	public List<VaccinationCenterShow> allVaccineCenters() throws VaccinationCentreException;
 	
-	public VaccinationCenter getVaccineCenter (Integer centerid)throws VaccinationCentreException; 
-
-	public VaccinationCenter addVaccineCenter (VaccinationCenter center)throws VaccinationCentreException;
-
-	public VaccinationCenter updateVaccineCenter (VaccinationCenter center)throws VaccinationCentreException;
-
+	public VaccinationCenterShow getVaccineCenter (Integer centerid)throws VaccinationCentreException; 
+//
+	public VaccinationCenterShow addVaccineCenter (VaccinationCenter center)throws VaccinationCentreException;
+//
+	public VaccinationCenterShow updateVaccineCenter (VaccinationCenter center)throws VaccinationCentreException;
+//
 	boolean deleteVaccineCenter (VaccinationCenter center )throws VaccinationCentreException; 	
 }

@@ -10,13 +10,16 @@ public class ShowAppointment {
     private LocalDate dateOfBooking;
     private Slot slot;
     private boolean bookingStatus;
+    private Integer vaccinationCenterCode;
     
     public ShowAppointment() {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public ShowAppointment(Integer memberId, Integer bookingId, long mobileNo, LocalDate dateOfBooking, Slot slot,
-			boolean bookingStatus) {
+			boolean bookingStatus, String vaccinationCenter) {
 		super();
 		this.memberId = memberId;
 		this.bookingId = bookingId;
@@ -24,13 +27,33 @@ public class ShowAppointment {
 		this.dateOfBooking = dateOfBooking;
 		this.slot = slot;
 		this.bookingStatus = bookingStatus;
+		this.vaccinationCenterCode = vaccinationCenterCode;
 	}
+
+
+
+
+
+	public Integer getVaccinationCenterCode() {
+		return vaccinationCenterCode;
+	}
+
+
+
+	public void setVaccinationCenterCode(Integer vaccinationCenterCode) {
+		this.vaccinationCenterCode = vaccinationCenterCode;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "ShowAppointment [memberId=" + memberId + ", bookingId=" + bookingId + ", mobileNo=" + mobileNo
-				+ ", dateOfBooking=" + dateOfBooking + ", slot=" + slot + ", bookingStatus=" + bookingStatus + "]";
+				+ ", dateOfBooking=" + dateOfBooking + ", slot=" + slot + ", bookingStatus=" + bookingStatus
+				+ ", vaccinationCenterCode=" + vaccinationCenterCode + "]";
 	}
+
+
 
 	public Integer getMemberId() {
 		return memberId;

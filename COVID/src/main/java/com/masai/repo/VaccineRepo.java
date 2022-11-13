@@ -16,5 +16,5 @@ public interface VaccineRepo  extends JpaRepository<Vaccine, Integer>{
 	
 	//for vaccine
 	@Query("select v from Vaccine v where vaccninName=?1 ")
-	public Vaccine getVaccinerByName(String vaccineName);
+	public List<Vaccine> getVaccinerByName(String vaccineName);
 }
