@@ -69,6 +69,15 @@ public class AppointmentController {
 
 			return new ResponseEntity<>(app2,HttpStatus.ACCEPTED);
 		}
+		
+		@PutMapping("/getvaccinated/{id}")
+		public String Vacccinated(@PathVariable Integer id) throws AppointmentException {
+			
+			String str = appointmentService.vaccinated(id);
+			return  str;
+			
+		}
+		
 //
 //		//Delete Appointment
 //

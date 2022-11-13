@@ -30,7 +30,6 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberShow> allMember() throws MemberException {
 		// TODO Auto-generated method stub
 		
-		
 		List<Member> l1 = mr.findAll();
 		List<MemberShow> ms = new  ArrayList<>();
 		
@@ -66,8 +65,7 @@ public class MemberServiceImpl implements MemberService{
 //          	    private LocalDate dateOfRegistration;
 //                  private Integer  appointmentId;
 				ms.add(mems);
-			}
-			
+			}	
 			return ms;
 		}
 		else {
@@ -80,6 +78,7 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 	    Optional<Member> m= mr.findById(idcardid);
 		
+	    
 	    if(m.isPresent()) {
 	    	
 	    	MemberShow mems= new MemberShow();
@@ -203,10 +202,15 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		
 		Member m2=mr.getMemberByAdhar(member.getIdCard().getAdharCard().getAdharNo());
+		Member m3=mr.getMemberByPanNo(member.getIdCard().getPanCard().getPanNo());
 		
-		 if(m2 != null){
+		 if(m2 != null ){
 		    	throw new MemberException("member already present with adharNo "+member.getIdCard().getAdharCard().getAdharNo());
-		    }	 
+		    }
+		 else if(m3 != null){
+			 throw new MemberException("member already present with pan "+member.getIdCard().getPanCard().getPanNo());
+			  
+		 }
 	     else {
 		Member m=mr.save(member);
 		MemberShow mems= new MemberShow();
@@ -284,18 +288,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean deleteMember(Member member) throws MemberException {
+	public boolean deleteMember(Integer member) throws MemberException {
 		// TODO Auto-generated method stub
-		Optional<Member> m = mr.findById(member.getMemberId());
+		Optional<Member> m = mr.findById(member);
 		
 		 if(m.isPresent()){
 			 
-			  mr.deleteById(member.getMemberId());
+			  mr.deleteById(member);
 			  
 			  return true;
 		    }	 
 	   else{
-	    	 throw new MemberException("No member found to update with  id  "+member.getMemberId());
+	    	 throw new MemberException("No member found to update with  id  "+member);
 		  }
 		
 		

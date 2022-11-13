@@ -75,8 +75,6 @@ public class VaccineServiceImpl implements VaccineService {
 		}else {
 			throw new VaccineException("no vaccine found by vaccine id"+vaccineld);
 		}
-		 
-		
 	}
 
 	@Override

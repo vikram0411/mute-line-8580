@@ -20,7 +20,7 @@ public interface MemberService {
 //
 	public MemberShow updateMember ( Member member )throws MemberException; 
 
-	public boolean deleteMember (Member member)throws MemberException;
+	public boolean deleteMember (Integer member)throws MemberException;
  
 }
 

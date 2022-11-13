@@ -90,10 +90,10 @@ public class MemberController {
 		}
 //		
 		/// changes possible :- runs but thinking of changing parameter to something easy
-		@DeleteMapping("/deleteMember")
-		public ResponseEntity<String> deleteMember(@RequestBody Member mb)throws MemberException{
+		@DeleteMapping("/deleteMember/{id}")
+		public ResponseEntity<String> deleteMember(@PathVariable Integer id)throws MemberException{
 
-			boolean ans = mService.deleteMember(mb) ;
+			boolean ans = mService.deleteMember(id) ;
 
 			 return new ResponseEntity<String>("Member Deleted succesfully", HttpStatus.GONE) ;
 		}

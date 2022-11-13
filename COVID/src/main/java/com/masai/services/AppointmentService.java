@@ -18,6 +18,8 @@ public interface AppointmentService {
 //	
 	public boolean deleteAppointment (Integer mid, Integer app)throws AppointmentException;
 //	
+	public String vaccinated(Integer id)throws AppointmentException;
+	
 	ShowAppointment updateAppointment(Integer mid, Appointment app) throws AppointmentException;
 //	boolean deleteAppointment(Integer mid, Integer app) throws AppointmentException;
 }

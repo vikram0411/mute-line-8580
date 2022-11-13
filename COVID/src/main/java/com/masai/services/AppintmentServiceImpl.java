@@ -48,6 +48,8 @@ public class AppintmentServiceImpl implements AppointmentService{
 			throw new AppointmentException("no appointment found for bookingid"+bookingid);
 		}		
 	}
+	
+	
 //
 	@Override
 	public ShowAppointment addAppointment(Integer memberid,Appointment app,Integer vc) throws AppointmentException {
@@ -56,7 +58,6 @@ public class AppintmentServiceImpl implements AppointmentService{
 		if(m.isPresent()) {
 			if(m.get().getAppointment()==null) {
 				app.setMember(m.get());
-				
 				
 				Optional<VaccinationCenter> apoi= vcr.findById(vc);
 				
@@ -86,9 +87,7 @@ public class AppintmentServiceImpl implements AppointmentService{
 			}
 		}else {
 			throw new AppointmentException("no member found with given credentials for getting appointment");
-		}
-		
-		
+		}	
 	}
 //
 	
@@ -177,5 +176,33 @@ public class AppintmentServiceImpl implements AppointmentService{
 		
 	}
 
-
+	@Override
+	public String vaccinated(Integer id) throws AppointmentException {
+		// TODO Auto-generated method stub
+		Optional<Member> m= mr.findById(id);
+		if(m.isPresent()) {
+			if(m.get().getAppointment()!=null) {
+			Member m2=m.get();
+			if(m2.getDose1Date()==null) {
+				m2.setDose1Date(LocalDate.now());
+				m2.setDose1Status(true);
+				mr.save(m2);
+				return "First dose vaccination done";
+			}
+			else if(m2.getDose2Date()==null) {
+				m2.setDose2Date(LocalDate.now());
+				m2.setDose2Status(true);
+				mr.save(m2);
+				return "Second dose vaccination done";
+			}else {
+				throw new AppointmentException("you are already fully vaccinated");
+			}
+			}
+			else {
+				throw new AppointmentException("first get a appointment");
+			}
+		}else {
+			throw new AppointmentException("no member found with id : "+id);
+		}	
+	}
 }
