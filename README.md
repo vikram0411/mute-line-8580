@@ -1,4 +1,4 @@
-# Booking Covid-19 Vaccine Slots Online
+# Covid Vaccinator
 
 Making API for BookingCovid-19VaccineSlotsOnline and performing CRUD operations.
 A spring boot application project to develop REST APIs that can perform
