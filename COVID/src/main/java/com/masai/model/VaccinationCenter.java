@@ -15,8 +15,8 @@ public class VaccinationCenter {
     @Embedded
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Appointment appointment;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Appointment> appointment;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccinationCenter")
     private Vaccine vaccines;
@@ -48,11 +48,11 @@ public class VaccinationCenter {
 
 
 
-    public Appointment getAppointment() {
+    public List<Appointment> getAppointment() {
 		return appointment;
 	}
 
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
 	}
 
@@ -67,7 +67,7 @@ public class VaccinationCenter {
 	public VaccinationCenter() {
     }
 
-	public VaccinationCenter(Integer code, String centerName, Address address, Appointment appointment,
+	public VaccinationCenter(Integer code, String centerName, Address address, List<Appointment> appointment,
 			Vaccine vaccines) {
 		super();
 		this.code = code;
@@ -80,7 +80,9 @@ public class VaccinationCenter {
 	@Override
 	public String toString() {
 		return "VaccinationCenter [code=" + code + ", centerName=" + centerName + ", address=" + address
-				+ ", appointment=" + appointment + ", vaccines=" + vaccines + "]";
+				+ ", appointment=" + appointment + ""
+						+ ", vaccines=" + vaccines 
+						+ "]";
 	}
 
 	

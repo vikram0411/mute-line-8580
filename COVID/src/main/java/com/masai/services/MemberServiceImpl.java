@@ -3,13 +3,25 @@ package com.masai.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.controller.MemberController;
 import com.masai.exception.MemberException;
 import com.masai.model.Member;
 import com.masai.repo.MemberRepo;
 
-public class MemberServiceImpl implements MemberService{
-	public MemberRepo mr;
 
+@Service
+public class MemberServiceImpl implements MemberService{
+	
+	@Autowired
+	MemberRepo mr;
+
+//	@Autowired
+//	MemberController mc;
+	
+	
 	@Override
 	public List<Member> allMember() throws MemberException {
 		// TODO Auto-generated method stub
@@ -69,14 +81,14 @@ public class MemberServiceImpl implements MemberService{
 	public Member addMember(Member member) throws MemberException {
 		// TODO Auto-generated method stub
 		
-		Member m = mr.getMemberByAdhar(member.getIdCard().getAdharCard().getAdharNo());
 		
-		 if(m != null){
-		    	throw new MemberException("member already present with adharNo "+member.getIdCard().getAdharCard().getAdharNo());
-		    }	 
-	     else {
-	    	    return mr.save(member);
-		  }
+//		 if(m != null){
+//		    	throw new MemberException("member already present with adharNo "+member.getIdCard().getAdharCard().getAdharNo());
+//		    }	 
+//	     else {
+		Member m=mr.save(member);
+	    	    return m;
+//		  }
 		
 	}
 
@@ -95,6 +107,8 @@ public class MemberServiceImpl implements MemberService{
 			m2.setDose1Status(member.isDose1Status());
 			m2.setDose2Date(member.getDose2Date());
 			m2.setDose2Status(member.isDose2Status());
+			m2.setIdCard(member.getIdCard());
+			m2.setVaccineRegistration(member.getVaccineRegistration());
 
 			return mr.save(m2);
 		    }	 

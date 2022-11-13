@@ -3,12 +3,17 @@ package com.masai.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.masai.exception.VaccinationCentreException;
 import com.masai.model.VaccinationCenter;
 import com.masai.repo.VaccinationCenterRepo;
 
+@Service
 public class VaccinationCenterServiceImpl implements VaccinationCenterService {
 
+	@Autowired
 	private VaccinationCenterRepo vcr;
 	
 	@Override
@@ -29,11 +34,13 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService {
 		// TODO Auto-generated method stub
 		VaccinationCenter v=vcr.findByCenterName(center.getCenterName());
 //		VaccinationCenter v = null;
-		if(v!=null) {
-			return v;
-		}
+		if(v==null) {
+//			return v;
+			VaccinationCenter vc= vcr.save(center);
+			return center;
+		} 
 		else {
-			 throw new VaccinationCentreException("Vaccination center already present with centername"+center.getCenterName());	
+			throw new VaccinationCentreException("Vaccination center already present with centername"+center.getCenterName());	
 				
 		}
 	}

@@ -3,13 +3,24 @@ package com.masai.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.masai.exception.VaccineException;
+import com.masai.model.VaccinationCenter;
 import com.masai.model.Vaccine;
+import com.masai.repo.VaccinationCenterRepo;
 import com.masai.repo.VaccineRepo;
 
+
+@Service
 public class VaccineServiceImpl implements VaccineService {
 
+	@Autowired
 	private VaccineRepo vr;
+	
+	@Autowired
+	private VaccinationCenterRepo vcr;
 	
 	@Override
 	public Vaccine getVaccineByName(String vaccineName) throws VaccineException {
@@ -23,7 +34,7 @@ public class VaccineServiceImpl implements VaccineService {
 		}
 		
 	}
-
+//
 	@Override
 	public Vaccine getVaccinebyld(Integer vaccineld) throws VaccineException {
 		// TODO Auto-generated method stub
@@ -39,17 +50,29 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 
 	@Override
-	public Vaccine addVaccine(Vaccine vaccine) throws VaccineException {
+	public Vaccine addVaccine(Vaccine vaccine,Integer VaccinneCenterId) throws VaccineException {
 		// TODO Auto-generated method stub
-       Vaccine c=vr.getVaccinerByName(vaccine.getVaccninName());
 		
-		if(c!=null) {
-			throw new VaccineException("a vaccine is already present with vaccine name"+vaccine.getVaccninName());
+		Optional<VaccinationCenter> vaccen= vcr.findById(VaccinneCenterId);
+		
+		if(vaccen.isPresent()) {
+			
+			Vaccine c=vr.getVaccinerByName(vaccine.getVaccninName());
+			
+			
+			if(c!=null) {
+				throw new VaccineException("a vaccine is already present with vaccine name"+vaccine.getVaccninName());
+			}else {
+				vaccine.setVaccinationCenters(vaccen.get());
+				vaccen.get().setVaccines(vaccine);
+				 vcr.save(vaccen.get());
+				return vr.save(vaccine);
+			}
 		}else {
-			return vr.save(c);
+			throw new VaccineException("No vacinationCenter present with id"+VaccinneCenterId	);
 		}
 	}
-
+//
 	@Override
 	public Vaccine updateVaccine(Vaccine vaccine) throws VaccineException {
 		
@@ -68,21 +91,25 @@ public class VaccineServiceImpl implements VaccineService {
 				throw new VaccineException("no vaccine found for updation by vaccine id");
 			}
 	}
-
+	
+	
+//
 	@Override
-	public boolean deleteVaccine(Vaccine vaccine) throws VaccineException {
-		 Optional<Vaccine> c=vr.findById(vaccine.getVaccineId());
+	public boolean deleteVaccine(Integer id) throws VaccineException {
+		 Optional<Vaccine> c=vr.findById(id);
 			
 			if(c.isPresent()) {
 				Vaccine v= c.get();
-			    vr.deleteById(vaccine.getVaccineId());
+			    vr.deleteById(id);
 				return true;
 				
 			}else {
-				throw new VaccineException("no vaccine found for updation by vaccine id"+vaccine.getVaccineId());
+				throw new VaccineException("no vaccine found for updation by vaccine id"+id);
 			}
 	}
-
+	
+	
+	
 	@Override
 	public List<Vaccine> allVaccine() throws VaccineException {
 		// TODO Auto-generated method stub

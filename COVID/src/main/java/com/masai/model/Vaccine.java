@@ -17,7 +17,7 @@ public class Vaccine {
     private VaccinationCenter vaccinationCenter ;
 
 
-    @Embedded
+    @Embedded  
     private VaccineInventory vaccineInventory;
 
     
